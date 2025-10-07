@@ -1,0 +1,84 @@
+### Set a variable for the base URL of your local server
+@baseUrl = http://localhost:3000
+
+# Note: After creating a new employee, copy their ID and paste it here to test the other endpoints.
+@employeeId = 64c9e5a3d9f3c1a5c9b4e8a4
+
+
+###################################################
+#            User Management Endpoints            #
+###################################################
+
+### 1. Create a new user account (Sign Up)
+# Allows a user to create a new account.
+# @response-code 201
+POST {{baseUrl}}/api/v1/user/signup
+Content-Type: application/json
+
+{
+  "username": "johndoe",
+  "email": "johndoe@example.com",
+  "password": "password123"
+}
+
+### 2. Log in a user
+# Allows an existing user to access the system.
+# @response-code 200
+POST {{baseUrl}}/api/v1/user/login
+Content-Type: application/json
+
+{
+  "email": "johndoe@example.com",
+  "password": "password123"
+}
+
+
+###################################################
+#          Employee Management Endpoints          #
+###################################################
+
+### 3. Get all employees
+# Retrieves a list of all employees.
+# @response-code 200
+GET {{baseUrl}}/api/v1/emp/employees
+
+
+### 4. Create a new employee
+# Adds a new employee to the database.
+# @response-code 201
+POST {{baseUrl}}/api/v1/emp/employees
+Content-Type: application/json
+
+{
+  "first_name": "Alice",
+  "last_name": "Johnson",
+  "email": "alice.johnson@example.com",
+  "position": "Designer",
+  "salary": 85000,
+  "date_of_joining": "2023-08-10T00:00:00.000Z",
+  "department": "Design"
+}
+
+
+### 5. Get a single employee by ID
+# Retrieves details for a specific employee using their ID as a path parameter.
+# @response-code 200
+GET {{baseUrl}}/api/v1/emp/employees/{{employeeId}}
+
+
+### 6. Update an employee's details
+# Updates an employee's details using their ID as a path parameter.
+# @response-code 200
+PUT {{baseUrl}}/api/v1/emp/employees/{{employeeId}}
+Content-Type: application/json
+
+{
+  "position": "Senior Designer",
+  "salary": 95000
+}
+
+
+### 7. Delete an employee by ID
+# Deletes an employee using their ID as a query parameter.
+# @response-code 204
+DELETE {{baseUrl}}/api/v1/emp/employees?eid={{employeeId}}
