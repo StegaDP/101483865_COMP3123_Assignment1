@@ -2,7 +2,7 @@
 @baseUrl = http://localhost:3000
 
 # Note: After creating a new employee, copy their ID and paste it here to test the other endpoints.
-@employeeId = 64c9e5a3d9f3c1a5c9b4e8a4
+@employeeId = 68e9ea680d0a80df841eb820
 
 
 ###################################################
