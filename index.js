@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 
 app.use(express.json())
 
-mongoose.connect("mongodb+srv://root:770088@assignment1.2o8nw8n.mongodb.net/assignment1").then(()=>console.log("Connected to MongoDB")).catch((err)=>console.log(`Error connecting to MongoDB: ${err.message}`));
+mongoose.connect("mongodb+srv://root:770088@assignment1.2o8nw8n.mongodb.net/comp3123_assigment1").then(()=>console.log("Connected to MongoDB")).catch((err)=>console.log(`Error connecting to MongoDB: ${err.message}`));
 
 app.use("/api/v1/user", userRouter)
 app.use("/api/v1/emp", employeeRouter)
