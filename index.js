@@ -1,22 +1,37 @@
-const express = require('express');
-const app = express()
-const port = process.env.PORT || 3000
-const userRouter = require('./routes/user')
-const employeeRouter = require('./routes/employee')
+require("dotenv").config({ quiet: true });
+
+const express = require("express");
 const mongoose = require("mongoose");
+const { graphqlHTTP } = require("express-graphql");
+const { graphqlUploadExpress } = require("graphql-upload");
+const schema = require("./schema");
+const resolvers = require("./resolvers");
 
-app.use(express.json())
+const app = express();
+const port = process.env.PORT || 3000;
 
-mongoose.connect("mongodb+srv://root:770088@assignment1.2o8nw8n.mongodb.net/comp3123_assigment1").then(()=>console.log("Connected to MongoDB")).catch((err)=>console.log(`Error connecting to MongoDB: ${err.message}`));
+app.use(express.json());
 
-app.use("/api/v1/user", userRouter)
-app.use("/api/v1/emp", employeeRouter)
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.log(`Error connecting to MongoDB: ${err.message}`));
 
+app.use(
+  "/graphql",
+  graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }),
+  graphqlHTTP((req) => ({
+    schema,
+    rootValue: resolvers,
+    graphiql: true,
+  })),
+);
+app.get("/", (req, res) => {
+  res.send("GraphQL API is running. Visit /graphql for GraphiQL.");
+});
 
 app.listen(port, () => {
-  console.log(`Web Server is listening on port ${port}`)
-})
+  console.log(`Web Server is listening on port ${port}`);
+});
