@@ -4,13 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "private": true,
   "dependencies": {
+    "@graphql-tools/schema": "^10.0.31",
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^2.9.0",
     "crypto": "^1.0.1",
+    "dotenv": "^17.3.1",
     "express": "^5.1.0",
+    "express-graphql": "^0.12.0",
     "express-validator": "^7.2.1",
+    "graphql": "^15.10.1",
+    "graphql-upload": "^13.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.1"
   }
